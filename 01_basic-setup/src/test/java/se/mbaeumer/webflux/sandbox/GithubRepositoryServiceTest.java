@@ -1,6 +1,7 @@
 package se.mbaeumer.webflux.sandbox;
 
 import junit.framework.TestCase;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ public class GithubRepositoryServiceTest extends TestCase {
 
     @Test
     public void testGetRepositories() {
-        githubRepositoryService.getRepositories();
+        String actual = githubRepositoryService.getRepositories();
+        Assert.assertNotNull(actual);
     }
 }
