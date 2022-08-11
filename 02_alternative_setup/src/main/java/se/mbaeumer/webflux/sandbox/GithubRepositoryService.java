@@ -2,8 +2,8 @@ package se.mbaeumer.webflux.sandbox;
 
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
 @Service
 public class GithubRepositoryService {
@@ -15,12 +15,9 @@ public class GithubRepositoryService {
     }
 
     public String getRepositories(){
-        Mono<String> response = webClient.get()
+        ClientResponse response = webClient.get()
                 .uri("https://api.github.com/users/mbaeumer/repos")
-
-                .exchange().block().bodyToMono(String.class);
-        String strResponse = response.block();
-        System.out.println(strResponse);
-        return strResponse;
+                .exchange().block();
+        return response.toEntity(String.class).block().getBody();
     }
 }
