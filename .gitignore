@@ -29,7 +29,7 @@ target/
 *.ipr
 atlassian-ide-plugin.xml
 
-*.txt
+#*.txt
 *.dmp
 *.trc
 *.lck

@@ -1,0 +1,13 @@
+switching to JUnit 5
+-----
+add junit dependencies:
+- jupiter-api
+- jupiter-engine
+exclude junit from spring-boot-starter-testadd dependencies for MockWebServer
+exchange imports to the correct packages (e.g. for @Test annotation)
+
+stubbing the call
+-----
+add dependencies for MockWebServer
+add MockWebServer start and shutdown
+specify the stubbed response
