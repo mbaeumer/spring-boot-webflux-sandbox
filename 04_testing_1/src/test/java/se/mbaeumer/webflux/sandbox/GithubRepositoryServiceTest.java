@@ -1,6 +1,5 @@
 package se.mbaeumer.webflux.sandbox;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
@@ -52,10 +51,18 @@ public class GithubRepositoryServiceTest {
     }
 
     @Test
-    public void testGetRepositoriesWithExchange() {
-        String actual = githubRepositoryService.getRepositoriesWithExchange();
+    public void testGetRepositoriesWithRetrieve() {
+        mockBackEnd.url("https://api.github.com/users/mbaeumer/repos");
+        mockBackEnd.enqueue(new MockResponse()
+                .setBody("hello-dummy")
+                .addHeader("Content-Type", "application/json"));
+
+        githubRepositoryService = new GithubRepositoryService(WebClient.builder(),
+                mockBackEnd.url("/").toString());
+
+        String actual = githubRepositoryService.getRepositoriesWithRetrieve();
         assertNotNull(actual);
-        assertTrue(actual.contains("spring-boot-webflux-sandbox"));
+        assertTrue(actual.contains("hello-dummy"));
     }
 
     private String getMockedResponse(){
