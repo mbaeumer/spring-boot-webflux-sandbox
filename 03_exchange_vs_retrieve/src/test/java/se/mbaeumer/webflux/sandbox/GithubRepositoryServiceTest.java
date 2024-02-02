@@ -24,6 +24,7 @@ public class GithubRepositoryServiceTest extends TestCase {
     @Test
     public void testGetRepositoriesWithExchange() {
         String actual = githubRepositoryService.getRepositoriesWithExchange();
+        System.out.println(actual);
         Assert.assertNotNull(actual);
         Assert.assertTrue(actual.contains("spring-boot-webflux-sandbox"));
     }
